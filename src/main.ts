@@ -1,15 +1,34 @@
-import express from "express";
-import { router } from "./routes";
+import { sync as readUpSync } from "read-pkg-up";
+import { cache } from "@storybook/core-common";
+import { join } from "node:path";
+import { buildDevStandalone } from "@storybook/core-server";
 
-const app = express();
-const port = 3000;
+const dev = async () => {
+  process.env.NODE_ENV = "development";
 
-app.use(router);
+  const packageJson = readUpSync({
+    cwd: join(__dirname, "../node_modules/@storybook/cli"),
+  })?.packageJson;
 
-app.get("/", (_req, res) => {
-  res.send("Hello World!");
-});
+  const cliOptions = {
+    disableTelemetry: false,
+    debug: false,
+    open: true,
+    versionUpdates: true,
+    releaseNotes: true,
+    port: 3000,
+  };
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+  const options = {
+    ...cliOptions,
+    configDir: "./.storybook",
+    configType: "DEVELOPMENT",
+    ignorePreview: false,
+    cache,
+    packageJson,
+  } as any;
+
+  await buildDevStandalone(options);
+};
+
+dev();
