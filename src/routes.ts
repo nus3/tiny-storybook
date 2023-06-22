@@ -1,3 +1,5 @@
 import { Router } from "express";
 
-export const router = Router();
+// @ts-expect-error (Converted from ts-ignore)
+
+export const router: Router = new Router();

@@ -9,5 +9,8 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  features: {
+    storyStoreV7: true, // 👈 Opt out of on-demand story loading
+  },
 };
 export default config;
