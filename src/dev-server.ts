@@ -24,7 +24,6 @@ export const storybookDevServer = async (options: Options) => {
   );
 
   let indexError: Error;
-  // try get index generator, if failed, send telemetry without storyCount, then rethrow the error
   const initializedStoryIndexGenerator: Promise<
     StoryIndexGenerator | undefined
   > = getStoryIndexGenerator(features || {}, options, serverChannel).catch(
@@ -49,19 +48,6 @@ export const storybookDevServer = async (options: Options) => {
       error ? reject(error) : resolve()
     );
   });
-
-  // const previewStarted = previewBuilder
-  //   .start({
-  //     startTime: process.hrtime(),
-  //     options,
-  //     router,
-  //     server,
-  //     channel: serverChannel,
-  //   })
-  //   .catch(async (e: any) => {
-  //     await previewBuilder?.bail().catch();
-  //     throw e;
-  //   });
 
   const previewStarted = start({
     startTime: process.hrtime(),
