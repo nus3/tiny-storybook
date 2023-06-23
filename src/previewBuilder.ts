@@ -4,6 +4,7 @@ import { createViteServer } from "./vite-server";
 import { dirname, join } from "path";
 import express, { RequestHandler } from "express";
 import * as fs from "fs-extra";
+import { transformIframeHtml } from "./transform-iframe-html";
 
 type ViteStats = {
   toJson: () => any;
@@ -13,7 +14,10 @@ type ViteBuilder = Builder<UserConfig, ViteStats>;
 const wrapForPnP = (input: string) =>
   dirname(require.resolve(join(input, "package.json")));
 
-function iframeMiddleware(server: ViteDevServer): RequestHandler {
+function iframeMiddleware(
+  options: Options,
+  server: ViteDevServer
+): RequestHandler {
   return async (req, res, next) => {
     if (!req.url.match(/^\/iframe\.html($|\?)/)) {
       next();
@@ -31,9 +35,10 @@ function iframeMiddleware(server: ViteDevServer): RequestHandler {
       require.resolve("@storybook/builder-vite/input/iframe.html"),
       "utf-8"
     );
+    const generated = await transformIframeHtml(indexHtml, options);
     const transformed = await server.transformIndexHtml(
       "/iframe.html",
-      indexHtml
+      generated
     );
     res.setHeader("Content-Type", "text/html");
     res.status(200).send(transformed);
@@ -62,7 +67,7 @@ export const start: ViteBuilder["start"] = async ({
     express.static(previewDirOrigin, { immutable: true, maxAge: "5m" })
   );
 
-  router.use(iframeMiddleware(server));
+  router.use(iframeMiddleware(options, server));
   router.use(server.middlewares);
 
   return {

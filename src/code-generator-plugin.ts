@@ -12,6 +12,7 @@ import {
 } from "./virtual-file-names";
 import { generateImportFnScriptCode } from "./codegen-importfn-script";
 import { generateModernIframeScriptCode } from "./codegen-modern-iframe-script";
+import { transformIframeHtml } from "./transform-iframe-html";
 
 export function codeGeneratorPlugin(options: Options): Plugin {
   const iframePath = require.resolve(
@@ -113,11 +114,11 @@ export function codeGeneratorPlugin(options: Options): Plugin {
 
       return undefined;
     },
-    // async transformIndexHtml(html, ctx) {
-    //   if (ctx.path !== "/iframe.html") {
-    //     return undefined;
-    //   }
-    //   return transformIframeHtml(html, options);
-    // },
+    async transformIndexHtml(html, ctx) {
+      if (ctx.path !== "/iframe.html") {
+        return undefined;
+      }
+      return transformIframeHtml(html, options);
+    },
   };
 }

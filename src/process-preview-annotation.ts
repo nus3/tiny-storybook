@@ -1,5 +1,7 @@
 import type { PreviewAnnotation } from "@storybook/types";
 import { resolve, isAbsolute, relative } from "path";
+// slashはwindowsのバックスラッシュを変換するライブラリなので一旦利用しない
+// slashを使うと `Error [ERR_REQUIRE_ESM]: require() of ES Module`と怒られる
 // import slash from "slash";
 import { stripAbsNodeModulesPath } from "@storybook/core-common";
 

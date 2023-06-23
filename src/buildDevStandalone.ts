@@ -4,6 +4,7 @@ import type {
   CoreConfig,
   LoadOptions,
   Options,
+  StorybookConfig,
 } from "@storybook/types";
 import {
   loadAllPresets,
@@ -65,9 +66,13 @@ export const buildDevStandalone = async (
   // if (!builderName) return;
   // const previewBuilder = getPreviewBuilder(builderName, options.configDir);
 
+  const features = await presets.apply<StorybookConfig["features"]>("features");
+  global.FEATURES = features;
+
   const fullOptions: Options = {
     ...options,
     presets,
+    features,
   };
 
   await storybookDevServer(fullOptions);

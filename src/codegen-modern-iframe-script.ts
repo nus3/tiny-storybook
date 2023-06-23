@@ -19,7 +19,6 @@ export async function generateModernIframeScriptCode(
     [],
     options
   );
-  console.log({ previewAnnotations });
   const previewAnnotationURLs = [...previewAnnotations, previewOrConfigFile]
     .filter(Boolean)
     .map((path) => processPreviewAnnotation(path, projectRoot));
