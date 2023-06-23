@@ -1,7 +1,4 @@
 import Watchpack from "watchpack";
-// slashはwindowsのバックスラッシュを変換するライブラリなので一旦利用しない
-// slashを使うと `Error [ERR_REQUIRE_ESM]: require() of ES Module`と怒られる
-// import slash from "slash";
 import fs from "fs";
 import path from "path";
 import glob from "globby";

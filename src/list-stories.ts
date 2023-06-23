@@ -1,7 +1,4 @@
 import * as path from "path";
-// slashはwindowsのバックスラッシュを変換するライブラリなので一旦利用しない
-// slashを使うと `Error [ERR_REQUIRE_ESM]: require() of ES Module`と怒られる
-// import slash from "slash";
 import { glob } from "glob";
 import { normalizeStories } from "@storybook/core-common";
 
