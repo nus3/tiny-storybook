@@ -1,7 +1,6 @@
 import { sync as readUpSync } from "read-pkg-up";
 import { cache } from "@storybook/core-common";
 import { join } from "node:path";
-// import { buildDevStandalone } from "@storybook/core-server";
 import { buildDevStandalone } from "./buildDevStandalone";
 
 const dev = async () => {
