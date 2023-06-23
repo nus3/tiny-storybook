@@ -1,3 +1,5 @@
+// @storybook/builder-viteのcode/builders/builder-vite/src/index.tsが該当
+
 import type { UserConfig, ViteDevServer } from "vite";
 import type { Builder, Options } from "@storybook/types";
 import { createViteServer } from "./vite-server";

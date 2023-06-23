@@ -9,10 +9,10 @@ import {
   virtualFileId,
   // virtualPreviewFile,
   virtualStoriesFile,
-} from "./virtual-file-names";
-import { generateImportFnScriptCode } from "./codegen-importfn-script";
-import { generateModernIframeScriptCode } from "./codegen-modern-iframe-script";
-import { transformIframeHtml } from "./transform-iframe-html";
+} from "../virtual-file-names";
+import { generateImportFnScriptCode } from "../codegen-importfn-script";
+import { generateModernIframeScriptCode } from "../codegen-modern-iframe-script";
+import { transformIframeHtml } from "../transform-iframe-html";
 
 export function codeGeneratorPlugin(options: Options): Plugin {
   const iframePath = require.resolve(

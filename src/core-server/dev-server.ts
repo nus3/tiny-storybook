@@ -2,11 +2,11 @@ import express from "express";
 
 import type { CoreConfig, Options, StorybookConfig } from "@storybook/types";
 import { createServer } from "http";
-import { router } from "./routes";
+import { router } from "./router";
 import { getManagerBuilder, getPreviewBuilder } from "./get-builders";
 import { getServerChannel } from "./get-server-channel";
 import { useStatics } from "./server-statics";
-import { bail, start } from "./previewBuilder";
+import { bail, start } from "../builder-vite/preview-builder";
 import { StoryIndexGenerator } from "./storyIndexGenerator/StoryIndexGenerator";
 import { getStoryIndexGenerator } from "./storyIndexGenerator/getStoryIndexGenerator";
 

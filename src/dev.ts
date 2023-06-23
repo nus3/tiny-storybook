@@ -1,7 +1,7 @@
 import { sync as readUpSync } from "read-pkg-up";
 import { cache } from "@storybook/core-common";
 import { join } from "node:path";
-import { buildDevStandalone } from "./buildDevStandalone";
+import { buildDevStandalone } from "./core-server/build-dev";
 
 const dev = async () => {
   process.env.NODE_ENV = "development";

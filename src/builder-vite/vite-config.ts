@@ -8,7 +8,7 @@ import {
   loadConfigFromFile,
   mergeConfig,
 } from "vite";
-import { codeGeneratorPlugin } from "./code-generator-plugin";
+import { codeGeneratorPlugin } from "./plugins/code-generator-plugin";
 
 const configEnvServe: ConfigEnv = {
   mode: "development",
